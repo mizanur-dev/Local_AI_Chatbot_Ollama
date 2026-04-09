@@ -1,0 +1,11 @@
+django>=5.0
+djangorestframework
+ollama
+django-cors-headers
+python-dotenv
+requests
+uvicorn
+langchain-ollama
+langchain-core
+channels
+daphne
