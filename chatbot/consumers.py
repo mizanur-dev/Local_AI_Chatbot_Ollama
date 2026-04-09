@@ -36,10 +36,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
             chain = prompt | llm | StrOutputParser()
             
             # Use astream for streaming responses
+            full_reply = ""
             async for chunk in chain.astream({"input": user_message}):
-                await self.send(text_data=json.dumps({
-                    'reply': chunk
-                }))
+                full_reply += chunk
+            
+            await self.send(text_data=json.dumps({
+                'reply': full_reply
+            }))
 
         except Exception as e:
             await self.send(text_data=json.dumps({
